@@ -1,27 +1,32 @@
-# class ExpedientesNormales:
-#     def __init__(self,)
 
 
-
-
-# class ExpedientesUrgentes:
-#     def __init__(self,)
-
+from Colas import *
+from Pila import *
+from Fuero import *
 
 class Expediente :
     
-    def __init__(self,nroExp , tipoExp=" ",prioridad=" ",estado=""):
+    def __init__(self, nroExp = 0 ,fuero= Fuero.Civil,prioridad = Prioridad.Normal ,estado = Estado.Juicio):
         self.nroExp = nroExp
-        self.tipoExp = tipoExp
-        self.prioridad = prioridad
-        self.estado = estado
+        self.Fuero = fuero
+        self.Prioridad = prioridad
+        self.Estado = estado
         
    
     
     def __repr__(self):
-        printeo = "|| Nro Exp: " + str(self.nroExp) + "| tipo: " + str(self.tipoExp) + "| prioridad: " + str(self.prioridad) + "| estado: "+ str(self.estado) + " || "
+        printeo = "|| Nro Exp: " + str(self.nroExp) + "| tipo: " + str(self.Fuero) + "| prioridad: " + str(self.Prioridad) + "| estado: "+ str(self.Estado) + " || "
         return printeo
     
+
+    def esNormal(self):
+        return self.Prioridad == 0
+
+
+    def esUrgente(self):
+        return self.Prioridad == 1
+
+
 
 class Juzgados:
     
