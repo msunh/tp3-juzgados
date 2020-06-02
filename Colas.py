@@ -27,7 +27,7 @@ class Colas:
         self.cola.clear() #eliminar todo el contenido de la misma
         
             
-    def ultimoElemento(self):
+    def primerElementoFila(self):
         aux= None
 
         if not self.estaVacia():

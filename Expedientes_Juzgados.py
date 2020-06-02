@@ -22,6 +22,9 @@ class Expediente :
     def esUrgente(self):
         return self.prioridad == 1
 
+    def esDeEstado(self,tipo):
+        return self.estado == tipo
+    
 
 
 class Juzgados:
@@ -47,9 +50,9 @@ class Juzgados:
     def primerExpedienteATratar(self):
         dato=None
         if not self.colaUrgente.estaVacia():
-            dato=self.colaUrgente.ultimoElemento()
+            dato=self.colaUrgente.primerElementoFila()
         else:
-            dato=self.colaNormal.ultimoElemento()
+            dato=self.colaNormal.primerElementoFila()
         return dato
     
     
@@ -74,22 +77,27 @@ class Juzgados:
     
     def esCritico(self):
         return self.colaNormal.tamanioCola()>=50 or self.colaUrgente.tamanioCola() >= 50 
-    
    
-    
+
     def enJuicio(self):
-        sumaExpNormal=0
-        sumaExpUrg=0
-        for elementos in self.colaNormal:
-            if elementos.estado == 1:
-                sumaExpNormal+=1
-        
-        
-        for elementos in self.colaUrgente:
-            if elementos.estado == 1:
-                sumaExpUrg+=1
-        
-        return(sumaExpNormal+sumaExpUrg)
+        colaEnJuicio = Colas()
+        todos = Colas()
+        todos = self.colaUrgente.clonarCola()
+        colaEstadoNormal = Colas()
+        colaEstadoNormal = self.colaNormal.clonarCola()
+    
+        while not colaEstadoNormal.estaVacia():
+            todos.encolar(colaEstadoNormal.desencolar())
+
+        while not todos.estaVacia():
+            if todos.primerElementoFila().esDeEstado(Estado.Juicio):
+                colaEnJuicio.encolar(todos.desencolar())
+            else:
+                todos.desencolar()
+
+        return colaEnJuicio.tamanioCola()
+
+    
                 
 
     def buscarExpediente(self,nroExp):
