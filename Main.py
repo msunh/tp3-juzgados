@@ -47,49 +47,10 @@ print()
 print("Es Critico?: ", juzgado1.esCritico())  
 print()
 print("Cantidad de expedientes en Juicio: ", juzgado1.enJuicio())
+print()
+print(juzgado1.buscarExpediente(2))
 
 
-# expediente1 = Expediente(2,"civil", "normal", "investigacion")
-# expediente2 = Expediente(4,"penal","urgente", "juicio")
-# expediente3 = Expediente(23,"civil","urgente","investigacion")
-# expediente4 = Expediente(40,"familia" ,"normal", "investigacion")
-# expediente5 = Expediente(80,"penal", "normal", "investigacion")
-# expediente6 = Expediente(83,"penal", "normal", "investigacion")
-# expediente7 = Expediente(85,"penal", "normal", "juicio")
-
-# print()
-# print("Contenido de los Juzgados: ")
-# juzgado1 = Juzgados()
-
-# juzgado1.recibirExpediente(expediente1)
-# juzgado1.recibirExpediente(expediente2)
-# #juzgado1.recibirExpediente(expediente3)
-# #juzgado1.recibirExpediente(expediente4)
-# #juzgado1.recibirExpediente(expediente5)
-# #juzgado1.recibirExpediente(expediente6)
-# #juzgado1.recibirExpediente(expediente7)
-
-
-# print(juzgado1)
-# print()
-# #print(juzgado1.primerExpedienteATratar())
-# #juzgado1.tratarExpediente()
-
-# print("La cantidad total de expedientes es : ",juzgado1.cantidadTotalExpedientes()) 
-# print()
-# print("la cantidad de expedientes por tipo es: ", juzgado1.expedientesPorTipo())
-# print()
-# print("Es critico?: ", juzgado1.esCritico())
-# print()
-# print("Cantidad de expedientes en Juicio: ", juzgado1.enJuicio())
-# print()
-
-# #buscar expediente numero:
-# print(juzgado1.buscarExpediente(80))
-
-# juzgado1.cambiaDeEstado(2)
-
-# print(juzgado1)
 
 
 

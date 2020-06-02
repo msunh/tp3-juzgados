@@ -25,7 +25,11 @@ class Expediente :
     def esDeEstado(self,tipo):
         return self.estado == tipo
     
+    def getNroExp(self) :
+        return self.nroExp
 
+    def esNumeroExp(self,num):
+        return self.nroExp == num
 
 class Juzgados:
     
@@ -100,77 +104,52 @@ class Juzgados:
     
                 
 
-    def buscarExpediente(self,nroExp):
-        expendienteBuscado = None
-        for elementos in self.colaNormal:
-            if elementos.nroExp == nroExp:
-                expendienteBuscado = elementos
-        for elementos in self.colaUrgente :
-            if elementos.nroExp == nroExp:
-                expendienteBuscado = elementos
+    def buscarExpediente(self,nroExpBuscado):
+        expedienteBuscado = None
+        todos = Colas()
+        todos = self.colaUrgente.clonarCola()
+        colaEstadoNormal = Colas()
+        colaEstadoNormal = self.colaNormal.clonarCola()
+        
 
-        return expendienteBuscado
+        while not colaEstadoNormal.estaVacia():
+            todos.encolar(colaEstadoNormal.desencolar())
+        
+        while not todos.estaVacia() and expedienteBuscado == None:
+            if todos.primerElementoFila().esNumeroExp(nroExpBuscado):
+                expedienteBuscado = todos.primerElementoFila()
+            else:
+                todos.desencolar()
+        
+        return expedienteBuscado
+        
     
-    
-    
-    
-    def eliminarExpediente(self,nroExp):
+    # def eliminarExpediente(self,nroExp):
 
-        for elementos in self.colaNormal:
-            if elementos.nroExp == nroExp:
-                self.colaNormal.remove(elementos)
-
-        for elementos in self.colaUrgente:
-            if elementos.nroExp == nroExp:
-                self.colaUrgente.remove(elementos)
-    
+    #     colaAuxUrgente = Colas()
+    #     colaAuxUrgente = self.colaUrgente.clonarCola()
+    #     colaAuxNormal = Colas()
+    #     colaAuxNormal = self.colaNormal.clonarCola()
 
 
-#    def cambiaDeEstado(self,nroExp):
-#            if self.buscarExpediente(nroExp) == nroExp :
-#                if self.estado=="normal":
-#                    self.estado = "urgente"
-#                    self.colaUrgente.recibirExpediente(nroExp)
-#                    self.colaNormal.eliminarExpediente(nroExp)
-#                elif self.estado == "urgente":
-#                    self.estado="normal"
-#                    self.colaUrgente.recibirExpediente(nroExp)
-#                    self.colaNormal.eliminarExpediente(nroExp)
-#                else:
-#                    Exception("El elemento no se encuentra en la cola")
-                
-                
-                
-#    def cambiaDeEstado(self,nroExp):
-#        
-#        aux = []
-#        
-#        for elementos in self.colaNormal:
-#            if elementos.nroExp == nroExp:
-#                elementos.prioridad = "urgente"
-#                aux.append(elementos)
-#                self.colaNormal.remove(elementos)
-#                self.colaUrgente.append(aux)
-#            
-#        for elementos in self.colaUrgente:
-#            if elementos.nroExp == nroExp:
-#                elementos.prioridad = "normal"
-#                aux.append(elementos)
-#                self.colaUrgente.remove(elementos)
-#                self.colaNormal.append(aux)
+    #     if self.buscarExpediente(nroExp).nroExp == nroExp :
+
+        
+
+
                      
             
-    def cambiaDeEstado(self,nroExp):
+    # def cambiaDeEstado(self,nroExp):
          
-         aux = None
+    #      aux = None
          
-         if self.buscarExpediente(nroExp).nroExp == nroExp:
-             aux = self.buscarExpediente(nroExp)
-             if self.buscarExpediente(nroExp).prioridad == "urgente":
-                 self.eliminarExpediente(nroExp)
-                 aux.prioridad = "normal"
-                 self.recibirExpediente(aux)
-             else:
-                 self.eliminarExpediente(nroExp)
-                 aux.prioridad = "urgente"
-                 self.recibirExpediente(aux)
+    #      if self.buscarExpediente(nroExp).nroExp == nroExp:
+    #          aux = self.buscarExpediente(nroExp)
+    #          if self.buscarExpediente(nroExp).prioridad == "urgente":
+    #              self.eliminarExpediente(nroExp)
+    #              aux.prioridad = "normal"
+    #              self.recibirExpediente(aux)
+    #          else:
+    #              self.eliminarExpediente(nroExp)
+    #              aux.prioridad = "urgente"
+    #              self.recibirExpediente(aux)

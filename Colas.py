@@ -31,7 +31,7 @@ class Colas:
         aux= None
 
         if not self.estaVacia():
-            aux = self.cola[len(self.cola)-1] #si no esta vacia devuelve el ultimo elemento de la cola
+            aux = self.cola[len(self.cola)-1] #si no esta vacia devuelve el primer elemento de la cola
         return aux
 
 
