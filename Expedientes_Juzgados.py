@@ -16,10 +16,10 @@ class Expediente :
     
 
     def esNormal(self):
-        return self.prioridad == 0
+        return self.prioridad == 0 #verificar esto
 
     def esUrgente(self):
-        return self.prioridad == 1
+        return self.prioridad == 1 #verificar esto
 
     def esDeEstado(self,tipo):
         return self.estado == tipo
@@ -43,9 +43,10 @@ class Expediente :
 
 class Juzgados:
     
-    def __init__(self, nombreJuez = None):
+    def __init__(self, nombreJuez = None, cantidad= 50):
         self.colaUrgente = Colas()
         self.colaNormal = Colas()
+        self.cantidadCritica = cantidad 
         self.nombreJuez = nombreJuez
         
    
@@ -55,9 +56,9 @@ class Juzgados:
     
    
     def recibirExpediente(self,exp):
-        if exp.prioridad == 0:
+        if exp.prioridad == 0:       #no conviene comparar con "es de prioridad"?
             self.colaNormal.encolar(exp)
-        elif exp.prioridad ==1:
+        elif exp.prioridad ==1:     #verificar esto
             self.colaUrgente.encolar(exp)
  
 
@@ -90,7 +91,7 @@ class Juzgados:
    
     
     def esCritico(self):
-        return self.colaNormal.tamanioCola()>=50 or self.colaUrgente.tamanioCola() >= 50 
+        return self.colaNormal.tamanioCola()>= self.cantidadCritica or self.colaUrgente.tamanioCola() >= self.cantidadCritica 
    
 
     def enJuicio(self):
