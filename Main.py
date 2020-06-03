@@ -48,8 +48,11 @@ print("Es Critico?: ", juzgado1.esCritico())
 print()
 print("Cantidad de expedientes en Juicio: ", juzgado1.enJuicio())
 print()
-print(juzgado1.buscarExpediente(2))
-
+print("El expediente buscado es :",juzgado1.buscarExpediente(2))
+print()
+juzgado1.eliminarExpediente(5)
+print()
+print(juzgado1)
 
 
 

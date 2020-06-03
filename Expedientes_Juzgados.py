@@ -18,7 +18,6 @@ class Expediente :
     def esNormal(self):
         return self.prioridad == 0
 
-
     def esUrgente(self):
         return self.prioridad == 1
 
@@ -30,6 +29,12 @@ class Expediente :
 
     def esNumeroExp(self,num):
         return self.nroExp == num
+
+    def getPrioridad(self):
+        return self.prioridad
+
+    def esDePrioridad(self,num):
+        return self.prioridad == num
 
 class Juzgados:
     
@@ -122,19 +127,49 @@ class Juzgados:
                 todos.desencolar()
         
         return expedienteBuscado
-        
+
+
+
     
-    # def eliminarExpediente(self,nroExp):
+    def eliminarExpediente(self,nroExpAEliminar):
 
-    #     colaAuxUrgente = Colas()
-    #     colaAuxUrgente = self.colaUrgente.clonarCola()
-    #     colaAuxNormal = Colas()
-    #     colaAuxNormal = self.colaNormal.clonarCola()
+        colaAuxUrgente = Colas()
+        colaAuxNormal = Colas()
+        
 
 
-    #     if self.buscarExpediente(nroExp).nroExp == nroExp :
+
+        if self.buscarExpediente(nroExpAEliminar).esDePrioridad(0):
+           
+            while not self.colaNormal.estaVacia():
+                if self.colaNormal.primerElementoFila().nroExp == nroExpAEliminar:
+                    self.colaNormal.desencolar()
+                else:
+                    colaAuxNormal.encolar(self.colaNormal.desencolar())
+            
+            self.colaNormal = colaAuxNormal
 
         
+        
+        if self.buscarExpediente(nroExpAEliminar).esDePrioridad(1):
+
+            while not self.colaUrgente.estaVacia():
+                if self.colaUrgente.primerElementoFila().nroExp == nroExpAEliminar:
+                    self.colaUrgente.desencolar()
+                else:
+                    colaAuxUrgente.encolar(self.colaUrgente.desencolar())
+            
+            self.colaUrgente = colaAuxUrgente
+
+
+        # if self.buscarExpediente(nroExpAEliminar).esDePrioridad(1):
+        
+        
+        
+        
+
+
+
 
 
                      
