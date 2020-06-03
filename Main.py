@@ -23,7 +23,15 @@ print()
 juzgado1 = Juzgados("Juanjo")
 print() 
 print("Juzgado: ", juzgado1)
-print()
+print()    # def cambiaDeEstado(self,nroExpACambiar):
+    #     aux = None
+
+    #      if self.buscarExpediente(nroExpACambiar).nroExp == nroExpACambiar:
+    #          aux = self.buscarExpediente(nroExpACambiar)
+
+    #          if self.buscarExpediente(nroExpACambiar).esDePrioridad(0):
+    #              self.eliminarExpediente(nroExpACambiar)
+    #              aux.prioridad 
 juzgado1.recibirExpediente(expediente1)
 juzgado1.recibirExpediente(expediente2)
 juzgado1.recibirExpediente(expediente3)
@@ -53,6 +61,14 @@ print()
 juzgado1.eliminarExpediente(5)
 print()
 print(juzgado1)
+#print("es de la prioridad: ", juzgado1.buscarExpediente(5).esDePrioridad(1))
+print()
+#expediente1.setPrioridad(Prioridad.Normal)
+print()
+juzgado1.cambiaDeEstado(1)
+print()
+print(juzgado1)
+
 
 
 

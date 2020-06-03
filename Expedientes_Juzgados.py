@@ -30,11 +30,16 @@ class Expediente :
     def esNumeroExp(self,num):
         return self.nroExp == num
 
+    def setPrioridad(self,tipo):
+        self.prioridad = tipo
+
     def getPrioridad(self):
         return self.prioridad
 
     def esDePrioridad(self,num):
         return self.prioridad == num
+
+
 
 class Juzgados:
     
@@ -106,9 +111,6 @@ class Juzgados:
 
         return colaEnJuicio.tamanioCola()
 
-    
-                
-
     def buscarExpediente(self,nroExpBuscado):
         expedienteBuscado = None
         todos = Colas()
@@ -129,16 +131,11 @@ class Juzgados:
         return expedienteBuscado
 
 
-
-    
     def eliminarExpediente(self,nroExpAEliminar):
 
         colaAuxUrgente = Colas()
         colaAuxNormal = Colas()
-        
-
-
-
+   
         if self.buscarExpediente(nroExpAEliminar).esDePrioridad(0):
            
             while not self.colaNormal.estaVacia():
@@ -148,10 +145,7 @@ class Juzgados:
                     colaAuxNormal.encolar(self.colaNormal.desencolar())
             
             self.colaNormal = colaAuxNormal
-
-        
-        
-        if self.buscarExpediente(nroExpAEliminar).esDePrioridad(1):
+        else:
 
             while not self.colaUrgente.estaVacia():
                 if self.colaUrgente.primerElementoFila().nroExp == nroExpAEliminar:
@@ -162,29 +156,17 @@ class Juzgados:
             self.colaUrgente = colaAuxUrgente
 
 
-        # if self.buscarExpediente(nroExpAEliminar).esDePrioridad(1):
-        
-        
-        
-        
+    def cambiaDeEstado(self,nroExpACambiar):
+        aux = None
 
+        if self.buscarExpediente(nroExpACambiar).nroExp == nroExpACambiar:
+            aux = self.buscarExpediente(nroExpACambiar)
 
-
-
-
-                     
-            
-    # def cambiaDeEstado(self,nroExp):
-         
-    #      aux = None
-         
-    #      if self.buscarExpediente(nroExp).nroExp == nroExp:
-    #          aux = self.buscarExpediente(nroExp)
-    #          if self.buscarExpediente(nroExp).prioridad == "urgente":
-    #              self.eliminarExpediente(nroExp)
-    #              aux.prioridad = "normal"
-    #              self.recibirExpediente(aux)
-    #          else:
-    #              self.eliminarExpediente(nroExp)
-    #              aux.prioridad = "urgente"
-    #              self.recibirExpediente(aux)
+            if self.buscarExpediente(nroExpACambiar).esDePrioridad(0):
+                self.eliminarExpediente(nroExpACambiar)
+                aux.setPrioridad(Prioridad.Urgente) 
+                self.recibirExpediente(aux)
+            else:
+                self.eliminarExpediente(nroExpACambiar)    
+                aux.setPrioridad(Prioridad.Normal) 
+                self.recibirExpediente(aux)
