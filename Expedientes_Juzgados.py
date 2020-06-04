@@ -88,7 +88,8 @@ class Juzgados:
     def expedientesPorTipo(self):
         return "cantidad exp cola normal: ", self.colaNormal.tamanioCola(), " cantidad exp cola urgentes: ", self.colaUrgente.tamanioCola()
                 
-   
+    def cantidadDeExpedientesUrgentes(self):
+        return self.colaUrgente.tamanioCola()
     
     def esCritico(self):
         return self.colaNormal.tamanioCola()>= self.cantidadCritica or self.colaUrgente.tamanioCola() >= self.cantidadCritica 

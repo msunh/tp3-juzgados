@@ -29,7 +29,43 @@ class EdificioTribunales:
     def establecerJuzgado(self,piso,oficina,juzgado):
         self.edificio[piso][oficina] = juzgado
 
+    def oficinaVacia(self,piso,oficina):
+        return self.edificio[piso][oficina] == None
     
+    
+    def buscaJuzgado(self,juez):
+
+        auxPiso=None
+        auxOficina=None
+
+        for piso in range(len(self.edificio)):
+            for oficina in range(len(self.edificio[0])):
+
+                if not self.oficinaVacia(piso,oficina):
+                    if self.edificio[piso][oficina].nombreJuez == juez:
+                        
+                        auxPiso = [piso]
+                        auxOficina = [oficina]
+                
+        return auxPiso, auxOficina 
+
+
+    def juzgadoMenosRecargado(self):
+        cantidadDeUrgentes = 0
+        auxPiso = None
+        auxOficina = None
+
+        for piso in range(len(self.edificio)):
+            for oficina in range(len(self.edificio[0])): 
+
+                if not self.oficinaVacia(piso,oficina):
+
+                    if cantidadDeUrgentes < self.edificio[piso][oficina].cantidadDeExpedientesUrgentes()
+                        cantidadDeUrgentes = self.edificio[piso][oficina].cantidadDeExpedientesUrgentes()
+                        
+
+
+
     # def cantidadDeJuzgadosCriticos(self,piso):
     #     cantidadDeJuzgadosCriticos(piso) + cantidadDeJuzgadosCriticos(piso-1)
         
@@ -43,30 +79,6 @@ class EdificioTribunales:
     #             cantExp + self.colaUrgente.tamanioCola()
         
     #     return cantExp
-    
-    
-    
-    def oficinaVacia(self,piso,oficina):
-        return self.edificio[piso][oficina] == None
-            
-          
-    def buscaJuzgado(self,juez):
-        
-        posicion=None
-        
-        for piso in range(len(self.edificio)-1):
-            for oficina in range(len(self.edificio[0])-1):
-                if self.oficinaVacia(piso,oficina):
-                    posicion= None
-                elif not self.oficinaVacia(piso,oficina): 
-                    if self.edificio[piso][oficina].nombreJuez == juez:
-                        posicion = self.edificio[piso][oficina]
-                
-        return posicion  
-        
-
-
-
 
 
 

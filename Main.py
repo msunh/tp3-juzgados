@@ -11,8 +11,8 @@ expediente3 = Expediente(3,Fuero.Familia, Prioridad.Normal, Estado.Investigacion
 expediente4 = Expediente(4,Fuero.Laboral,Prioridad.Urgente,Estado.Juicio)
 expediente5 = Expediente(5,Fuero.Penal ,Prioridad.Normal, Estado.Investigacion)
 expediente6 = Expediente(6,Fuero.Laboral,Prioridad.Normal,Estado.Juicio)
-#expediente6 = Expediente(7,"penal", "normal", "investigacion")
-#expediente7 = Expediente(8,"penal", "normal", "juicio")
+expediente7 = Expediente(7,Fuero.Familia,Prioridad.Urgente,Estado.Investigacion)
+
 
 
 print(expediente1)
@@ -23,21 +23,15 @@ print()
 juzgado1 = Juzgados("Juanjo")
 print() 
 print("Juzgado: ", juzgado1)
-print()    # def cambiaDeEstado(self,nroExpACambiar):
-    #     aux = None
+print()    
 
-    #      if self.buscarExpediente(nroExpACambiar).nroExp == nroExpACambiar:
-    #          aux = self.buscarExpediente(nroExpACambiar)
-
-    #          if self.buscarExpediente(nroExpACambiar).esDePrioridad(0):
-    #              self.eliminarExpediente(nroExpACambiar)
-    #              aux.prioridad 
 juzgado1.recibirExpediente(expediente1)
 juzgado1.recibirExpediente(expediente2)
 juzgado1.recibirExpediente(expediente3)
 juzgado1.recibirExpediente(expediente4)
 juzgado1.recibirExpediente(expediente5)
 juzgado1.recibirExpediente(expediente6)
+
 print()
 print(juzgado1)
 print()
@@ -68,6 +62,11 @@ print()
 juzgado1.cambiaDeEstado(1)
 print()
 print(juzgado1)
+print()
+print(juzgado1.cantidadDeExpedientesUrgentes())
+print()
+juzgado1.recibirExpediente(expediente7)
+print(juzgado1.cantidadDeExpedientesUrgentes())
 
 
 
