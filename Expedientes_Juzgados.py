@@ -15,12 +15,6 @@ class Expediente :
         return printeo
     
 
-    def esNormal(self):
-        return self.prioridad == 0 #verificar esto
-
-    def esUrgente(self):
-        return self.prioridad == 1 #verificar esto
-
     def esDeEstado(self,tipo):
         return self.estado == tipo
     
@@ -38,6 +32,12 @@ class Expediente :
 
     def esDePrioridad(self,num):
         return self.prioridad == num
+    
+    def esNormal(self):
+        return self.esDePrioridad(0)
+
+    def esUrgente(self):
+        return self.esDePrioridad(1)
 
 
 
@@ -56,9 +56,9 @@ class Juzgados:
     
    
     def recibirExpediente(self,exp):
-        if exp.prioridad == 0:       #no conviene comparar con "es de prioridad"?
+        if exp.esNormal() :      
             self.colaNormal.encolar(exp)
-        elif exp.prioridad ==1:     #verificar esto
+        elif exp.esUrgente():     
             self.colaUrgente.encolar(exp)
  
 

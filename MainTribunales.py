@@ -2,7 +2,7 @@ from Tribunales import *
 import numpy as np
 
 
-edificio1 = EdificioTribunales(2,2)
+edificio1 = EdificioTribunales(3,3)
 print(edificio1)
 
 juzgado1 = Juzgados("Juanjo")
@@ -17,3 +17,7 @@ juzgado1.recibirExpediente(expediente1)
 edificio1.establecerJuzgado(0,1,juzgado1)
 print()
 print(edificio1)
+print()
+print("juzgado en posicion: " ,edificio1.getJuzgado(0,1))
+print(edificio1.buscaJuzgado("Juanjo"))
+# print("esta oficina esta vacia?",edificio1.oficinaVacia(0,3))
