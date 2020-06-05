@@ -19,7 +19,7 @@ class Colas: # nuestro TDA de colas de expedientes
         aux = None
         
         if not self.estaVacia():
-            aux = self.cola.pop() #desencola tomando el ultimo elemento de la lista
+            aux = self.cola.pop() #desencola tomando el ultimo elemento de la lista que es el primero a tratar
         return aux
 
    

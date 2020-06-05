@@ -3,7 +3,7 @@ from Pila import *
 from Fuero import *
 from Expedientes_Juzgados import *
                  
- #MAIN de prubas para los TDA Colas, Pilas, Fueros, Expedientes y Juzgados           
+ #MAIN de pruebas para los TDA Colas, Pilas, Fueros, Expedientes y Juzgados. 
 
 expediente1 = Expediente(1, Fuero.Civil, Prioridad.Urgente, Estado.Juicio )
 expediente2 = Expediente(2,Fuero.Comercial, Prioridad.Urgente, Estado.Juicio)

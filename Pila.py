@@ -1,5 +1,5 @@
 
-class Pila: # nuestro Tda de Pilas
+class Pila: # nuestra implementación del  Tda de Pilas
 
 
     def __init__(self):
