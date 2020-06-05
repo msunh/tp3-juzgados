@@ -35,15 +35,6 @@ class EdificioTribunales: #Nuestro TDA de Eificio De Tribunales
     def cantExpUrgPorOficina(self,piso,oficina): #funcion accesoria que retorna la cantidad de expedientes urgentes segun el piso y la oficina por parámetro
         return self.edificio[piso][oficina].cantidadDeExpedientesUrgentes()
        
-    def recorrerEdificio(self):
-        pisoAux = None
-        oficinaAux = None
-        
-        for piso in range(len(self.edificio)):
-            pisoAux = piso
-            for oficina in range(len(self.edificio[0])):
-                oficinaAux = oficina 
-                
         
     
     #esta operacion debía ser recursiva, pero no logramos resolverla, de todas maneras lo hicimos de forma iterativa
