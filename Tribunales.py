@@ -35,6 +35,16 @@ class EdificioTribunales: #Nuestro TDA de Eificio De Tribunales
     def cantExpUrgPorOficina(self,piso,oficina): #funcion accesoria que retorna la cantidad de expedientes urgentes segun el piso y la oficina por parámetro
         return self.edificio[piso][oficina].cantidadDeExpedientesUrgentes()
        
+    def recorrerEdificio(self):
+        pisoAux = None
+        oficinaAux = None
+        
+        for piso in range(len(self.edificio)):
+            pisoAux = piso
+            for oficina in range(len(self.edificio[0])):
+                oficinaAux = oficina 
+                
+        
     
     #esta operacion debía ser recursiva, pero no logramos resolverla, de todas maneras lo hicimos de forma iterativa
     def cantidadDeJuzgadosCriticos(self,piso):
@@ -86,8 +96,42 @@ class EdificioTribunales: #Nuestro TDA de Eificio De Tribunales
     
     
     
+    def mesaDeEntradas(self,pilaExpedientes,juez):
+        
+        expedienteARecibir = None
+        
+        for piso in range(len(self.edificio)):
+            for oficina in range(len(self.edificio[0])):
+                if not self.oficinaVacia(piso,oficina):
+                    if self.edificio[piso][oficina].nombreJuez == juez:
+                        while not pilaExpedientes.estaVacia():
+                            expedienteARecibir = pilaExpedientes.desapilarElemento()
+                            self.edificio[piso][oficina].recibirExpediente(expedienteARecibir)
     
-    def moverExpediente(nroExp,juezOrigen,juezDestino):
+    
+    
+    
+    
+    
+    def moverExpediente(self,nroExp,juezOrigen,juezDestino):
+        
+        expAMover = None
+        
+        for piso in range(len(self.edificio)):
+            for oficina in range(len(self.edificio[0])):
+                if not self.oficinaVacia(piso,oficina):
+                    if self.edificio[piso][oficina].nombreJuez == juezOrigen:
+                        expAMover = self.edificio[piso][oficina].buscarExpediente(nroExp)
+                        self.edificio[piso][oficina].eliminarExpediente(nroExp)
+                        
+        
+        for piso in range(len(self.edificio)):
+            for oficina in range(len(self.edificio[0])):
+                if not self.oficinaVacia(piso,oficina):
+                    if self.edificio[piso][oficina].nombreJuez == juezDestino:
+                        self.edificio[piso][oficina].recibirExpediente(expAMover)
+                        
+                        
         
         
         
@@ -98,10 +142,6 @@ class EdificioTribunales: #Nuestro TDA de Eificio De Tribunales
         
     
    
-
-
-
-
 
 
 

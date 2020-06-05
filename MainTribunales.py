@@ -1,4 +1,5 @@
 from Tribunales import *
+from Pila import *
 import numpy as np
 
 
@@ -11,6 +12,8 @@ juzgado1 = Juzgados("Juarez")
 juzgado2 = Juzgados("Morty")
 juzgado3 = Juzgados("Rick")
 juzgado4 = Juzgados("Chubaca")
+juzgado5 = Juzgados("Pipo")
+
 
 expediente1 = Expediente(1, Fuero.Civil, Prioridad.Urgente, Estado.Juicio )
 expediente2 = Expediente(2,Fuero.Comercial, Prioridad.Urgente, Estado.Juicio)
@@ -27,27 +30,37 @@ expediente12 = Expediente(12,Fuero.Civil,Prioridad.Normal,Estado.Investigacion)
 expediente13 = Expediente(13,Fuero.Civil,Prioridad.Urgente,Estado.Investigacion)
 expediente14 = Expediente(14,Fuero.Civil,Prioridad.Urgente,Estado.Investigacion)
 
+#Expedientes para la pila
+expediente15 = Expediente(15,Fuero.Penal,Prioridad.Urgente,Estado.Juicio)
+expediente16 = Expediente(16,Fuero.Laboral,Prioridad.Normal,Estado.Investigacion)
+expediente17 = Expediente(17,Fuero.Civil,Prioridad.Urgente,Estado.Investigacion)
+
+pilaDeExpedientes = Pila()
+pilaDeExpedientes.apilarElemento(expediente15)
+pilaDeExpedientes.apilarElemento(expediente16)
+pilaDeExpedientes.apilarElemento(expediente17)
 
 
 
-juzgado1.recibirExpediente(expediente1) #juzgado con 3 urgentes
+juzgado1.recibirExpediente(expediente1) #juzgado con 3 urgentes, juez Juarez
 juzgado1.recibirExpediente(expediente10)
 juzgado1.recibirExpediente(expediente11)
 
-juzgado2.recibirExpediente(expediente3) #tiene 1 normal y 2 urgentes
+juzgado2.recibirExpediente(expediente3) #tiene 1 normal y 2 urgentes, juez Morty
 juzgado2.recibirExpediente(expediente13)
 juzgado2.recibirExpediente(expediente14)
 
 
 
-juzgado3.recibirExpediente(expediente4) #tiene un solo expediente urgente
+juzgado3.recibirExpediente(expediente4) #tiene un solo expediente urgente , juez Rick
 
-juzgado4.recibirExpediente(expediente5) #2 urgentes y 2 normales
+
+juzgado4.recibirExpediente(expediente5) #2 urgentes y 2 normales, juez Chubaca
 juzgado4.recibirExpediente(expediente7)
 juzgado4.recibirExpediente(expediente8)
 juzgado4.recibirExpediente(expediente9)
 
-
+# juzgado5.recibirExpediente(pilaDeExpedientes) #juez pipo recibe expediente pila
 
 
 edificio1.establecerJuzgado(2,1,juzgado1)
@@ -74,3 +87,11 @@ print("El juzgado menos cargado se encuentra en la posicion: ",edificio1.juzgado
 print()
 # print(edificio1.getOficina())
 print("Cantidad juzgados criticos por piso: ", edificio1.cantidadDeJuzgadosCriticos(2))
+# edificio1.moverExpediente(4,"Rick","Juarez") DESCOMENTAR!!!!!!!!!!!!!!!!!
+print()
+print(edificio1)
+print()
+print("Pila de expedientes: ", pilaDeExpedientes)
+edificio1.mesaDeEntradas(pilaDeExpedientes,"Rick")
+print()
+print(edificio1)
