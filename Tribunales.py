@@ -19,7 +19,7 @@ class EdificioTribunales:
     def getPiso(self):
         return self.pisos
     
-    def getOficina(self):
+    def getOficinas(self):
         return self.oficinas
     
     def getJuzgado(self,piso,oficina):
@@ -32,7 +32,25 @@ class EdificioTribunales:
     def oficinaVacia(self,piso,oficina):
         return self.edificio[piso][oficina] == None
     
+    def cantExpUrgPorOficina(self,piso,oficina):
+        return self.edificio[piso][oficina].cantidadDeExpedientesUrgentes()
     
+    
+    
+    
+    def cantidadDeJuzgadosCriticos(self,piso):
+        
+        cantJuzgadosCriticos=0
+        
+        for i in range(self.getOficinas()):
+            if not self.oficinaVacia(piso,i):
+               if self.edificio[piso][i].esCritico():
+                   cantJuzgadosCriticos+=1
+                   
+        return cantJuzgadosCriticos
+            
+    
+
     def buscaJuzgado(self,juez):
 
         auxPiso=None
@@ -49,21 +67,37 @@ class EdificioTribunales:
                 
         return auxPiso, auxOficina 
 
-
+    
+    
     def juzgadoMenosRecargado(self):
-        cantidadDeUrgentes = 0
+        cantidadDeUrgentesMinima = 99999999
         auxPiso = None
         auxOficina = None
 
         for piso in range(len(self.edificio)):
             for oficina in range(len(self.edificio[0])): 
-
                 if not self.oficinaVacia(piso,oficina):
-
-                    if cantidadDeUrgentes < self.edificio[piso][oficina].cantidadDeExpedientesUrgentes()
-                        cantidadDeUrgentes = self.edificio[piso][oficina].cantidadDeExpedientesUrgentes()
+                    if cantidadDeUrgentesMinima > self.cantExpUrgPorOficina(piso,oficina):
+                        cantidadDeUrgentesMinima = self.cantExpUrgPorOficina(piso, oficina)
+                        auxPiso = [piso]
+                        auxOficina = [oficina]
                         
 
+        return auxPiso, auxOficina
+    
+    
+    
+    
+    def moverExpediente(nroExp,juezOrigen,juezDestino):
+        
+        
+        
+        
+    
+    
+    
+        
+        
 
 
     # def cantidadDeJuzgadosCriticos(self,piso):

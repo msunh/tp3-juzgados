@@ -43,7 +43,7 @@ class Expediente :
 
 class Juzgados:
     
-    def __init__(self, nombreJuez = None, cantidad= 50):
+    def __init__(self, nombreJuez = None, cantidad= 2):
         self.colaUrgente = Colas()
         self.colaNormal = Colas()
         self.cantidadCritica = cantidad 
