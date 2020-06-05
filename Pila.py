@@ -1,5 +1,5 @@
 
-class Pila:
+class Pila: # nuestro Tda de Pilas
 
 
     def __init__(self):
@@ -43,6 +43,6 @@ class Pila:
 
 
 
-    def tamanioPila(self):
-        return len(self.pila)
+    def tamanioPila(self): #devuelve el tamanio de la pila
+        return len(self.pila) 
 

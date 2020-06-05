@@ -1,4 +1,4 @@
-class Colas:
+class Colas: # nuestro TDA de colas de expedientes
     
     def __init__(self):
         self.cola=[] # creo la cola

@@ -5,7 +5,7 @@ from Expedientes_Juzgados import *
 import numpy as np
 
 
-class EdificioTribunales:
+class EdificioTribunales: #Nuestro TDA de Eificio De Tribunales
     
     def __init__(self,pisos = 0,oficinas = 0):
         self.pisos= pisos
@@ -19,35 +19,34 @@ class EdificioTribunales:
     def getPiso(self):
         return self.pisos
     
-    def getOficinas(self):
+    def getOficinasPorPiso(self): #devuelve la cantidad de oficinas por piso
         return self.oficinas
     
     def getJuzgado(self,piso,oficina):
         return self.edificio[piso][oficina]
     
     
-    def establecerJuzgado(self,piso,oficina,juzgado):
+    def establecerJuzgado(self,piso,oficina,juzgado): #establece juzgado en piso y oficina , indicando el juzgado. Lo agrega en la posicion dada
         self.edificio[piso][oficina] = juzgado
 
     def oficinaVacia(self,piso,oficina):
         return self.edificio[piso][oficina] == None
     
-    def cantExpUrgPorOficina(self,piso,oficina):
+    def cantExpUrgPorOficina(self,piso,oficina): #funcion accesoria que retorna la cantidad de expedientes urgentes segun el piso y la oficina por parámetro
         return self.edificio[piso][oficina].cantidadDeExpedientesUrgentes()
+       
     
-    
-    
-    
+    #esta operacion debía ser recursiva, pero no logramos resolverla, de todas maneras lo hicimos de forma iterativa
     def cantidadDeJuzgadosCriticos(self,piso):
         
         cantJuzgadosCriticos=0
         
-        for i in range(self.getOficinas()):
-            if not self.oficinaVacia(piso,i):
-               if self.edificio[piso][i].esCritico():
-                   cantJuzgadosCriticos+=1
+        for i in range(self.getOficinasPorPiso()): #recorremos las oficinas del piso
+            if not self.oficinaVacia(piso,i): #si la oficina no esta vacia (quedando piso fijo por parametro y cambiando i cada ves que entra al for)
+               if self.edificio[piso][i].esCritico(): #consulta en esas coordenadas (juzgado-oficina) si el mismo es critico
+                   cantJuzgadosCriticos+=1 # si lo es agrega 1 a la variable, por cada vez que un juzgado esta en estado critico
                    
-        return cantJuzgadosCriticos
+        return cantJuzgadosCriticos #retorna la cantidad de juzgados criticos en ese piso
             
     
 
@@ -95,24 +94,10 @@ class EdificioTribunales:
         
     
     
-    
-        
-        
 
-
-    # def cantidadDeJuzgadosCriticos(self,piso):
-    #     cantidadDeJuzgadosCriticos(piso) + cantidadDeJuzgadosCriticos(piso-1)
         
     
-    # def juzgadoMenosRecargado():
-       
-    #     cantExp = 0
-    #     for piso in self.edificio:
-    #         for oficina in self.edificio:
-    #             edificio[piso][oficina].colaUrgente.tamanioCola()
-    #             cantExp + self.colaUrgente.tamanioCola()
-        
-    #     return cantExp
+   
 
 
 

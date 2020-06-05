@@ -3,7 +3,7 @@ from Pila import *
 from Fuero import *
 from Expedientes_Juzgados import *
                  
- #MAIN            
+ #MAIN de prubas para los TDA Colas, Pilas, Fueros, Expedientes y Juzgados           
 
 expediente1 = Expediente(1, Fuero.Civil, Prioridad.Urgente, Estado.Juicio )
 expediente2 = Expediente(2,Fuero.Comercial, Prioridad.Urgente, Estado.Juicio)
@@ -44,7 +44,7 @@ print(juzgado1)
 print()
 print("La Cantidad Total De Exp. es:", juzgado1.cantidadTotalExpedientes())
 print()
-print(juzgado1.expedientesPorTipo())
+print("cantidad de expedientes por tipo en el jugado: ", juzgado1.expedientesPorTipo())
 print() 
 print("Es Critico?: ", juzgado1.esCritico())  
 print()
@@ -52,6 +52,7 @@ print("Cantidad de expedientes en Juicio: ", juzgado1.enJuicio())
 print()
 print("El expediente buscado es :",juzgado1.buscarExpediente(2))
 print()
+#eliminamos el expediente que se pasa por parametro
 juzgado1.eliminarExpediente(5)
 print()
 print(juzgado1)
@@ -59,14 +60,15 @@ print(juzgado1)
 print()
 #expediente1.setPrioridad(Prioridad.Normal)
 print()
+#seteamos un nuevo estado para testear
 juzgado1.cambiaDeEstado(1)
 print()
 print(juzgado1)
 print()
-print(juzgado1.cantidadDeExpedientesUrgentes())
+print("Cantidad De Expedientes Urgentes: ", juzgado1.cantidadDeExpedientesUrgentes())
 print()
 juzgado1.recibirExpediente(expediente7)
-print(juzgado1.cantidadDeExpedientesUrgentes())
+print("Cantidad De Expedientes Urgentes luego de recibir otro: ", juzgado1.cantidadDeExpedientesUrgentes())
 
 
 
