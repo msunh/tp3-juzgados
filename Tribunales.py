@@ -34,10 +34,12 @@ class EdificioTribunales: #Nuestro TDA de Eificio De Tribunales
     
     def cantExpUrgPorOficina(self,piso,oficina): #funcion accesoria que retorna la cantidad de expedientes urgentes segun el piso y la oficina por parámetro
         return self.edificio[piso][oficina].cantidadDeExpedientesUrgentes()
-       
+    
+    def esJuez(self,piso, oficina, nombre): #funcion accesoria para consultar si en la posicion dada se encuentra el juez que viene por parametro
+        return self.edificio[piso][oficina].getNombreJuez() == nombre  
         
     
-    #esta operacion debía ser recursiva, pero no logramos resolverla, de todas maneras lo hicimos de forma iterativa
+    #esta operacion debía ser recursiva, pero no logramos resolverla de esa manera, de todas maneras lo hicimos de forma iterativa
     def cantidadDeJuzgadosCriticos(self,piso):
         
         cantJuzgadosCriticos=0
@@ -49,78 +51,73 @@ class EdificioTribunales: #Nuestro TDA de Eificio De Tribunales
                    
         return cantJuzgadosCriticos #retorna la cantidad de juzgados criticos en ese piso
             
-    
+    #a partir de este punto nos damos cuenta que usamos los "for" para recorrer eledificio (matriz) y repetimos el codigo en cada una de las funciones siguiente, pero 
+    #no supimos como hacer para crear una funcion que realize esto y sea llamada desde cada una de las funciones siguientes ¿Es posible crear una función que recorra el edificio
+    #y que sea llamada cada vez que se necesita?
 
-    def buscaJuzgado(self,juez):
+    def buscaJuzgado(self,juez): #nuestra funcion de busqueda de juzgadoa partir del nombre del juez.
 
         auxPiso=None
         auxOficina=None
 
-        for piso in range(len(self.edificio)):
+        for piso in range(len(self.edificio)): # recorremos la matriz por piso y oficina
             for oficina in range(len(self.edificio[0])):
 
-                if not self.oficinaVacia(piso,oficina):
-                    if self.edificio[piso][oficina].nombreJuez == juez:
-                        
-                        auxPiso = [piso]
+                if not self.oficinaVacia(piso,oficina): # nos aseguramos que la oficina no esta vacia en la posicion dada
+                    if self.esJuez(piso,oficina,juez): #si la oficina no esta vacia comparamos con el nombre del juez que pasamos por parametro (self.edificio[piso][oficina].nombreJuez == juez)
+                        auxPiso = [piso] #si lo encuentra, guarda las posiciones en variables auxiliares
                         auxOficina = [oficina]
                 
-        return auxPiso, auxOficina 
-
+        return auxPiso, auxOficina #retorna las variables con las posiciones del juez encontrado
+      
     
-    
-    def juzgadoMenosRecargado(self):
-        cantidadDeUrgentesMinima = 99999999
+    def juzgadoMenosRecargado(self): #nuestra funcion de juzgado menos recargado
+        cantidadDeUrgentesMinima = 99999999 #lo inicializamos en un numero grande porque supimos como hacer que la primera vez que se ejecute tome el primer valor
         auxPiso = None
         auxOficina = None
 
-        for piso in range(len(self.edificio)):
+        for piso in range(len(self.edificio)):#recorremos el edificio(matriz)
             for oficina in range(len(self.edificio[0])): 
-                if not self.oficinaVacia(piso,oficina):
-                    if cantidadDeUrgentesMinima > self.cantExpUrgPorOficina(piso,oficina):
-                        cantidadDeUrgentesMinima = self.cantExpUrgPorOficina(piso, oficina)
-                        auxPiso = [piso]
+                if not self.oficinaVacia(piso,oficina): #si la oficina no esta vacia
+                    if cantidadDeUrgentesMinima > self.cantExpUrgPorOficina(piso,oficina): #y la cantidad guardada en la variable es mayor a la cantidad de urgentes obtenida en ese piso
+                        cantidadDeUrgentesMinima = self.cantExpUrgPorOficina(piso, oficina) # esa cantidad obtenida es el nuevo minimo
+                        auxPiso = [piso] #guardando la ubicacion en las variables para luego retornarla
                         auxOficina = [oficina]
                         
 
-        return auxPiso, auxOficina
-    
-    
-    
-    def mesaDeEntradas(self,pilaExpedientes,juez):
+        return auxPiso, auxOficina #retorna la posicion del juzgado menos recargado
+
+
+    def mesaDeEntradas(self,pilaExpedientes,juez): #funcion de mesa de entrada (incompleta)
         
         expedienteARecibir = None
         
-        for piso in range(len(self.edificio)):
+        for piso in range(len(self.edificio)):  #se recorre el edificio (matriz)
             for oficina in range(len(self.edificio[0])):
-                if not self.oficinaVacia(piso,oficina):
-                    if self.edificio[piso][oficina].nombreJuez == juez:
-                        while not pilaExpedientes.estaVacia():
-                            expedienteARecibir = pilaExpedientes.desapilarElemento()
-                            self.edificio[piso][oficina].recibirExpediente(expedienteARecibir)
-    
-    
-    
-    
-    
-    
-    def moverExpediente(self,nroExp,juezOrigen,juezDestino):
+                if not self.oficinaVacia(piso,oficina): #si la oficina no está vacia
+                    if self.esJuez(piso,oficina,juez):#si es el juez que le indicamos por parametro (#anterior self.edificio[piso][oficina].nombreJuez == juez)
+                        while not pilaExpedientes.estaVacia(): # mientras la pila de expedientes no esté vacia
+                            expedienteARecibir = pilaExpedientes.desapilarElemento() #lo desapilamos y lo guardamos en una variable
+                            self.edificio[piso][oficina].recibirExpediente(expedienteARecibir) # y lo vamos recibiendo en la posicion donde se encontró el juez de turno
+
+
+    def moverExpediente(self,nroExp,juezOrigen,juezDestino): #funcion de mover expediente
         
         expAMover = None
         
-        for piso in range(len(self.edificio)):
+        for piso in range(len(self.edificio)): #se recorre el edificio (matriz)
             for oficina in range(len(self.edificio[0])):
-                if not self.oficinaVacia(piso,oficina):
-                    if self.edificio[piso][oficina].nombreJuez == juezOrigen:
-                        expAMover = self.edificio[piso][oficina].buscarExpediente(nroExp)
-                        self.edificio[piso][oficina].eliminarExpediente(nroExp)
+                if not self.oficinaVacia(piso,oficina): #si la oficina no esta vacia
+                    if self.esJuez(piso,oficina,juezOrigen): #y coincide con el juez de origen #anterior self.edificio[piso][oficina].nombreJuez == juezOrigen:
+                        expAMover = self.edificio[piso][oficina].buscarExpediente(nroExp) #invocamos a la funcion de busqueda de expediente para luego el resultado se guarde en una variable auxiliar
+                        self.edificio[piso][oficina].eliminarExpediente(nroExp) #eliminamos el expediente encontrado de donde fue hallado 
                         
         
         for piso in range(len(self.edificio)):
             for oficina in range(len(self.edificio[0])):
                 if not self.oficinaVacia(piso,oficina):
-                    if self.edificio[piso][oficina].nombreJuez == juezDestino:
-                        self.edificio[piso][oficina].recibirExpediente(expAMover)
+                    if self.esJuez(piso,oficina,juezDestino):#si coincide con el juez destino.. (anterior self.edificio[piso][oficina].nombreJuez == juezDestino:)
+                        self.edificio[piso][oficina].recibirExpediente(expAMover) #la oficina del juez destino recibe el expediente anteriormente encontrado y que estaba guardado en la variable auxiliar
                         
                         
         

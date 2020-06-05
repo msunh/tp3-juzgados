@@ -1,5 +1,7 @@
 from Tribunales import *
 from Pila import *
+from Colas import *
+from Fuero import *
 import numpy as np
 
 
@@ -82,12 +84,15 @@ print()
 print("esta oficina esta vacia?: ",edificio1.oficinaVacia(0,0))
 print()
 print("Busca Juzgado del Juez y lo encuentra en la posicion: ", edificio1.buscaJuzgado("Chubaca"))
+print("Busca Juzgado del Juez y lo encuentra en la posicion: ", edificio1.buscaJuzgado("Rick"))
+print("Busca Juzgado del Juez y lo encuentra en la posicion: ", edificio1.buscaJuzgado("Juarez"))
 print()
 print("El juzgado menos cargado se encuentra en la posicion: ",edificio1.juzgadoMenosRecargado())
 print()
 # print(edificio1.getOficina())
-print("Cantidad juzgados criticos por piso: ", edificio1.cantidadDeJuzgadosCriticos(2))
-# edificio1.moverExpediente(4,"Rick","Juarez") DESCOMENTAR!!!!!!!!!!!!!!!!!
+print("Cantidad juzgados criticos en el piso: ", edificio1.cantidadDeJuzgadosCriticos(2))
+#mover expediente
+edificio1.moverExpediente(4,"Rick","Juarez") 
 print()
 print(edificio1)
 print()
@@ -95,3 +100,5 @@ print("Pila de expedientes: ", pilaDeExpedientes)
 edificio1.mesaDeEntradas(pilaDeExpedientes,"Rick")
 print()
 print(edificio1)
+print()
+#print(edificio1.esJuez(1,2,"Chubaca"))

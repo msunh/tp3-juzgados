@@ -43,7 +43,7 @@ class Expediente : #nuestro TDA Expediente
 
 class Juzgados: # Nuestro TDA de Juzgado
     
-    def __init__(self, nombreJuez = None, cantidad= 2): #se puede setear la cantidad critica de expedientes
+    def __init__(self, nombreJuez = None, cantidad= 2): #se puede setear la cantidad critica de expedientes, la bajamos para probar
         self.colaUrgente = Colas()
         self.colaNormal = Colas()
         self.cantidadCritica = cantidad 
@@ -54,6 +54,8 @@ class Juzgados: # Nuestro TDA de Juzgado
         printeo= "Juez: " + str(self.nombreJuez)+ "|" + " URGENTES: "+ str(self.colaUrgente) + " NORMALES: " + str(self.colaNormal)
         return printeo
     
+    def getNombreJuez(self):
+        return self.nombreJuez
    
     def recibirExpediente(self,exp): # recibe el expediente y lo encola en la cola correspondiente
         if exp.esNormal() :         #segun si es normal o si es urgente, usando la función encolar de las colas de expedientes
